@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Title</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #1a1a1a;
+      background-color: #c0c0c0;
+    }
+
+    header {
+      padding: 1rem 2rem;
+      background-color: #87ceeb;
+      border-bottom: 1px solid #5aaecc;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      color: #1a1a1a;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-btn {
+      padding: 0.5rem 1rem;
+      background-color: #191970;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .dropdown-btn:hover {
+      background-color: #2d2db5;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: calc(100% + 0.5rem);
+      background-color: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      min-width: 150px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      z-index: 100;
+    }
+
+    .dropdown-menu.open {
+      display: block;
+    }
+
+    .dropdown-menu a,
+    .dropdown-menu button {
+      display: block;
+      width: 100%;
+      padding: 0.6rem 1rem;
+      text-decoration: none;
+      color: #333;
+      background: none;
+      border: none;
+      text-align: left;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .dropdown-menu a:hover,
+    .dropdown-menu button:hover {
+      background-color: #f5f5f5;
+      color: #0066cc;
+    }
+
+    main nav {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    main nav a {
+      text-decoration: none;
+      color: #0066cc;
+    }
+
+    main nav a:hover {
+      text-decoration: underline;
+    }
+
+    .dropdown-menu .close-btn {
+      color: #888;
+      border-top: 1px solid #e0e0e0;
+      margin-top: 0.25rem;
+    }
+
+    /* Contact form dropdown */
+    .contact-dropdown {
+      position: relative;
+    }
+
+    .contact-form-panel {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: calc(100% + 0.5rem);
+      background-color: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      min-width: 300px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      z-index: 100;
+      padding: 1rem;
+    }
+
+    .contact-form-panel.open {
+      display: block;
+    }
+
+    .contact-form-panel h3 {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      color: #1a1a1a;
+    }
+
+    .contact-form-panel label {
+      display: block;
+      font-size: 0.875rem;
+      color: #444;
+      margin-bottom: 0.2rem;
+      margin-top: 0.6rem;
+    }
+
+    .contact-form-panel input,
+    .contact-form-panel select {
+      width: 100%;
+      padding: 0.4rem 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+
+    .contact-form-panel input:focus,
+    .contact-form-panel select:focus {
+      outline: none;
+      border-color: #0066cc;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .form-submit-btn {
+      flex: 1;
+      padding: 0.5rem;
+      background-color: #191970;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .form-submit-btn:hover {
+      background-color: #2d2db5;
+    }
+
+    .form-close-btn {
+      padding: 0.5rem 0.75rem;
+      background-color: #f5f5f5;
+      color: #333;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .form-close-btn:hover {
+      background-color: #e0e0e0;
+    }
+
+    header nav-group {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 1.5rem 2rem;
+      background-color: #696969;
+      border-radius: 6px;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: #ffffff;
+    }
+
+    p {
+      color: #f0f0f0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.875rem;
+      color: #333;
+      background-color: #c0c0c0;
+      border-top: 1px solid #a0a0a0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Paradigm Pet Professionals</h1>
+    <div style="display:flex; gap:0.75rem;">
+      <nav class="dropdown">
+        <button class="dropdown-btn" onclick="toggleMenu()">Menu ▾</button>
+        <div class="dropdown-menu" id="dropdownMenu">
+          <a href="cat.html">Cats</a>
+          <a href="dogs.html">Dogs</a>
+          <a href="fish.html">Fish</a>
+          <a href="index.html">Home</a>
+          <button class="close-btn" onclick="closeMenu()">Close</button>
+        </div>
+      </nav>
+
+      <div class="contact-dropdown">
+        <button class="dropdown-btn" onclick="toggleContactForm()">Contact ▾</button>
+        <div class="contact-form-panel" id="contactForm">
+          <h3>Request a Consultation</h3>
+          <form onsubmit="submitForm(event)">
+            <label for="yourName">Your Name</label>
+            <input type="text" id="yourName" placeholder="Jane Smith" required />
+
+            <label for="petName">Pet Name</label>
+            <input type="text" id="petName" placeholder="Whiskers" required />
+
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" placeholder="(555) 000-0000" required />
+
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="you@example.com" required />
+
+            <label for="petType">Type of Pet</label>
+            <select id="petType" required>
+              <option value="">Select...</option>
+              <option>Cat</option>
+              <option>Dog</option>
+              <option>Fish</option>
+              <option>Bird</option>
+              <option>Snake</option>
+              <option>Other</option>
+            </select>
+
+            <label for="petAge">Pet Age</label>
+            <input type="text" id="petAge" placeholder="e.g. 2 years" required />
+
+            <div class="form-actions">
+              <button type="submit" class="form-submit-btn">Submit</button>
+              <button type="button" class="form-close-btn" onclick="closeContactForm()">Close</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Welcome</h2>
+      <p>Pets are nature's gift to humanity. It has been scientifically proven that opening our homes and hearts to a pet increases our longevity and improves our overall quality of life as well as the lives of our pets. At Pet Paradigm Professionals, our mission is to offer resources to help you care for your furry, scaly, feathery, and slimy loved ones. Our pet experts—or “Pexperts”—have been working with pet owners and professionals alike for the past twelve years. They offer one-on-one consultations with current and prospective pet owners as well as group presentations designed for veterinary, pet shelter, and pet breeding professionals.
+
+Looking for basic pet care advice for the most common type of pets? Need additional help determining which type of pet is right for you and your family? We will work with you and provide tailored evidence-based pet care to ensure lifelong health and wellness of your new companion. 
+</p>
+      <nav>
+        <a href="cat.html">Cats</a>
+        <a href="dogs.html">Dogs</a>
+        <a href="fish.html">Fish</a>
+      </nav>
+    </section>
+
+    <section>
+      <h2>Contact an Pexpert</h2>
+      <p>Add more sections as needed.</p>
+    </section>
+    <section>
+      <p>Looking for your new best friend? The following organizations can help you find and adopt the perfect companion:</p>
+      <h2>Additional Sources</h2>
+      <p>General pet resources: <a href="https://bestfriends.org/pet-care-resources/issues/pet-adoption-resources">https://bestfriends.org/pet-care-resources/issues/pet-adoption-resources</a></p>
+      <p>ASPCA: <a href="https://www.aspca.org">https://www.aspca.org/ </a></p>
+      <p>Fish Rescue <a href="https://www.sterlingshelter.org/humane-society/koi-fish-rescue/">https://www.sterlingshelter.org/humane-society/koi-fish-rescue/</a></p>
+      <p>Snake Rescue <a href="https://savethesnakes.org/snakerescuecall/">https://savethesnakes.org/snakerescuecall/</a></p>
+      <p>Bird Rescue <a href="https://ftlob.rescuegroups.org/">https://ftlob.rescuegroups.org/</a></p>
+      <p>We are also happy to help you navigate the adoption process! We will guide you through each step in the process from determining which type of pet is best suited for your family and home environment, to completing the necessary paperwork, to bringing your new loved one home. Please fill out our contact form to request a consultation. We will contact you within 48 hours to schedule a consultation. All fields are required.</p>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Your Name. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('dropdownMenu').classList.toggle('open');
+    }
+
+    function closeMenu() {
+      document.getElementById('dropdownMenu').classList.remove('open');
+    }
+
+    function toggleContactForm() {
+      document.getElementById('contactForm').classList.toggle('open');
+    }
+
+    function closeContactForm() {
+      document.getElementById('contactForm').classList.remove('open');
+    }
+
+    function submitForm(e) {
+      e.preventDefault();
+      alert('Thank you! We will contact you within 48 hours.');
+      e.target.reset();
+      closeContactForm();
+    }
+
+    // Close menus when clicking outside
+    document.addEventListener('click', function(e) {
+      const dropdown = document.querySelector('.dropdown');
+      if (!dropdown.contains(e.target)) {
+        closeMenu();
+      }
+      const contactDropdown = document.querySelector('.contact-dropdown');
+      if (!contactDropdown.contains(e.target)) {
+        closeContactForm();
+      }
+    });
+  </script>
+
+</body>
+</html>
